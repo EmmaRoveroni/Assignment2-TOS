@@ -26,19 +26,30 @@ public class BillTest {
     public void setup (){
         b = new Bill(LocalTime.of(12,0,0,0));
         l = new ArrayList<MenuItem>();
-        l.add(new MenuItem("Pinguino",MenuItem.items.Budino,6.00));
-        l.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato,3.50));
         u = new User("Emma","Roveroni",21,0);
     }
 
     @Test
     public void ComputeTotalTest() {
-        
+        l.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato,3.50));
+        l.add(new MenuItem("Pinguino",MenuItem.items.Budino,6.00));
         try {
         assertEquals(9.50,b.getOrderPrice(l,u),0.0);
         } catch (TakeAwayBillException e) {
         System.out.println("Errore");
         }
+    }
+    
+    @Test
+    public void FiveIcecreamDiscount() {
+        for(int i = 0;i<5;i++) {
+            l.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato,3.50));
+        }
+        try {
+            assertEquals(15.75,b.getOrderPrice(l,u),0.0);
+        } catch (TakeAwayBillException e) {
+        System.out.println("Errore");
+            }
     }
 }
 
