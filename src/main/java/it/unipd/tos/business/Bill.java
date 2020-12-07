@@ -28,7 +28,9 @@ public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeA
         int icecreamcount = 0;
         double minprice = Double.MAX_VALUE;
         double ICandBcount = 0;
-        
+        if(itemsOrdered.size()>=30) {
+            throw new TakeAwayBillException("Numero massimo elementi per ordinazione raggiunto");
+        }
         for(MenuItem mi : itemsOrdered) {
             
             if(mi.getType() == items.Gelato) {

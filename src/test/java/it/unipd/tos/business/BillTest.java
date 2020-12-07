@@ -64,6 +64,17 @@ public class BillTest {
             System.out.println("Error");
         }
     }
+    @Test (expected = TakeAwayBillException.class)
+    public void ErrorForNumberOfOrders() throws TakeAwayBillException{
+        
+        
+        for(int i = 0; i < 30; i++) {
+            
+            l.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato,3.50));
+        }
+     
+        b.getOrderPrice(l, u);
+    }
     @After
     public void emptyList() {
         l.clear();
