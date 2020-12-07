@@ -32,8 +32,9 @@ public class BillTest {
     public void ComputeTotalTest() {
         l.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato,3.50));
         l.add(new MenuItem("Pinguino",MenuItem.items.Budino,6.00));
+        l.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato,3.50));
         try {
-        assertEquals(9.50,b.getOrderPrice(l,u),0.0);
+        assertEquals(13.00,b.getOrderPrice(l,u),0.0);
         } catch (TakeAwayBillException e) {
         System.out.println("Errore");
         }
@@ -74,6 +75,15 @@ public class BillTest {
         }
      
         b.getOrderPrice(l, u);
+    }
+    @Test 
+    public void TotalLower10CommissionTest() {
+        l.add(new MenuItem("Coppa Nafta",MenuItem.items.Gelato,3.50));
+        try {
+            assertEquals(4.00,b.getOrderPrice(l,u),0.0);
+        } catch (TakeAwayBillException e) {
+            System.out.println("Errore");
+        }
     }
     @After
     public void emptyList() {

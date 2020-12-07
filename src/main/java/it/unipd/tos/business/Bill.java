@@ -50,6 +50,10 @@ public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeA
         if (ICandBcount >= 50){
             tot = tot*0.9;
         }
+        if(tot < 10)
+        {
+            tot += 0.50;
+        }
         return tot;
     }
 
