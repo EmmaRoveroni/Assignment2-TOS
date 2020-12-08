@@ -13,6 +13,5 @@ public class TakeAwayBillException extends Throwable{
 
     public String getMessage(){
         return this.mex;
-    }
-  
+    } 
 }

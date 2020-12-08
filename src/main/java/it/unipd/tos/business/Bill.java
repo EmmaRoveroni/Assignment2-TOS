@@ -17,11 +17,27 @@ import it.unipd.tos.model.User;
 public class Bill implements TakeAwayBill {
 
     private LocalTime t;
+    private User u;
+    private boolean gifted;
+    private static BillRegister br = new BillRegister();
 
-    public Bill(LocalTime t){
+    public Bill(LocalTime t, User user){
         this.t = t;
+        this.u = user;
+        br.AddBill(this);
+        this.gifted = br.gift();
     }
-
+    public LocalTime getLocalTime() {
+        return t;
+    }    
+    
+    public User getUser() {
+        return u;
+    }
+    
+    public boolean getGifted() {
+        return gifted;
+    }    
 public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeAwayBillException {
         
         double tot = 0;
@@ -31,6 +47,7 @@ public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeA
         if(itemsOrdered.size()>=30) {
             throw new TakeAwayBillException("Numero massimo elementi per ordinazione raggiunto");
         }
+        if(!gifted) {
         for(MenuItem mi : itemsOrdered) {
             
             if(mi.getType() == items.Gelato) {
@@ -54,7 +71,7 @@ public double getOrderPrice(List<MenuItem> itemsOrdered, User user) throws TakeA
         {
             tot += 0.50;
         }
+        }
         return tot;
     }
-
 }
